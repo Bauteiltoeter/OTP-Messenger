@@ -1,0 +1,32 @@
+\section{Wie diese Vorlage funktioniert}
+\label{sec:vorlage-funktioniert}
+
+Um ein neues PDF-Dokument im einheitlichen Stil zu erstellen, einfach diesen
+Ordner mitsamt des Unterordners /latexmagic in ein neues Verzeichnis kopieren.
+
+\subsection{template.tex}
+\label{sec:template-tex}
+Die Datei template.tex ist die Hauptdatei, in ihr wird die Überschrift, das
+Datum sowie der Author bestimmt. Der Name dieser Datei bestimmt den Namen des
+reesultierenden PDFs, sie sollte also bei einem neuen Dokument umbenannt werden.
+
+\subsection{content.tex}
+\label{sec:content-tex}
+Diese Datei beinhaltet den eigentlichen Inhalt des PDFs. Sie darf nicht
+unbenannt werden, an sonsten kann die Latexmagic sie nicht mehr finden. 
+Natürlich können bei umfangreichen Dokumenten an dieser Stelle weitere
+*.tex-Dateien eingebunden werden.
+
+\subsection{Datei compileren}
+\label{sec:datei-compilieren}
+Zum Compilieren in eine PDF-Datei wird einfach das Kommando pdflatex
+template.tex angewandt. Damit Inhalts- und Abbildungsverzeichnis erstellt
+werden, muss der Befehl zwei mal hinter einander ausgeführt werden.
+
+\subsection{Design-Änderungen}
+\label{sec:design-changes}
+Änderungen am Design sollten immer ins LaTeX-Template übernommen werden. Diese
+Vorlage ist weit davon entfernt, gut zu sein. Vor allem in der package-Liste
+befinden sich viele Pakete, die zur Zeit keine Verwendung finden. Dies liegt
+daran, das ich selber diese Vorlage nur schnell aus anderen Projekten zusammen
+gefriemelt habe und selber große Teile von anderen Leuten übernommen habe.

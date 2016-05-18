@@ -1,0 +1,138 @@
+\documentclass[a4paper,oneside,12pt,halfparskip]{scrartcl} %fleqn for formula left align
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%usepackages
+\usepackage[utf8]{inputenc} %Kodierung
+\usepackage[english, ngerman]{babel} %Sprache
+\usepackage{geometry}
+\geometry{a4paper, top=25mm, left=32mm, right=25mm, bottom=30mm, headsep=10mm, footskip=10mm} %Ränder
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}	%includegraphic
+\usepackage[dvipsnames, table]{xcolor} %For xcolor
+\usepackage[final]{pdfpages}	%pdf include
+\usepackage{amssymb} %math	
+\usepackage{amsmath}
+\usepackage{lipsum}
+\usepackage{colortbl}
+\usepackage[automark]{scrpage2} % for header
+\usepackage[toc, page]{appendix} %appendix
+\usepackage{longtable}
+\usepackage{cite}  %for quotes
+\usepackage{siunitx} %units
+\usepackage{kpfonts} %font
+\usepackage{tikz} %tikz
+\usepackage{tikz-3dplot}
+\usepackage[only-used=false]{acro} %Nomenklatur
+\usepackage{hyperref} %pdf Eigenschaften
+\usepackage{pgfplots} %plots
+\usepackage[siunitx, european]{circuitikz} %si units
+\usepackage{setspace} %big/medspace
+\usepackage{multicol} %cells in tabular that have multiple rows
+\usepackage{pifont}
+\usepackage{lscape} %landscape mode
+\usepackage{standalone} %include .tex standalones
+\usepackage{setspace}
+\usepackage{wrapfig} 
+\usepackage{listings}
+\usepackage{multirow}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Header
+\automark[subsection]{section} % subsection/section in header
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Counter
+\newcounter{romanmark}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Colors
+\definecolor{ulgray}{gray}{.85}
+\definecolor{plotc1}{gray}{0}
+\definecolor{plotc2}{gray}{0}
+\definecolor{plotc3}{gray}{0}
+\definecolor{plotc4}{gray}{0}
+\definecolor{plotc5}{gray}{0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Tabular Settings
+%%%\newcolumntype{g}{>{\columncolor{lightgray}}c}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Fonts
+\setkomafont{disposition}{\bfseries}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%PGFplots
+\usepgfplotslibrary{units}
+\newlength{\plotheight}
+\newlength{\plotwidth}
+\setlength{\plotheight}{5cm}
+\setlength{\plotwidth}{13cm}
+\newlength{\ulength}
+\setlength{\ulength}{15cm}
+\newlength{\imgwidth}
+\setlength{\imgwidth}{10cm}
+\pgfplotsset{compat=1.10}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Tikz
+\usetikzlibrary{shapes, arrows, backgrounds, patterns, intersections, automata}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Formula
+%\setlength{\mathindent}{25pt} %align formula left
+\numberwithin{equation}{section} %formula index with section number
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Commands
+\newcommand{\uparagraph}[1]			{\paragraph*{#1}\mbox{}\\}
+\newcommand{\dwn}[1]				{_{\text {#1}}}
+\newcommand{\tilec}[1]				{\tilde{\vec{#1}}}
+\newcommand{\ucenter}[1]			{\begin{figure}[!ht] \begin{center} #1 \end{center} \end{figure}}
+\newcommand{\uccenter}[2]			{\begin{figure}[!ht] \begin{center} #1  \caption{#2} \end{center} \end{figure}}
+\newcommand{\uclcenter}[3]			{\begin{figure}[!ht] \begin{center} #1  \caption{#2} \label{#3} \end{center} \end{figure}}
+\newcommand{\linebreakcell}[2][l]	{\begin{tabular}[#1]{@{}l@{}}#2\end{tabular}}
+\newcommand{\xmark}					{\ding{55}}
+\newcommand{\cmark}					{\ding{51}}
+\newcommand{\utype}[1]				{\textbf{#1}}
+\newcommand{\ukey}[1]				{\textit{#1}}
+\newcommand{\uemph}[1]				{\emph{#1}}
+
+\newcommand{\uwidearrowidth}		{.7}
+\newcommand{\uvwidearrow}[4]		{\node at($(#2)!.8!(#3)$) (dummy){}; \draw[#1] ($(#2)-(\uwidearrowidth/2,0)$)--++(\uwidearrowidth,0) |- ($(dummy)+(\uwidearrowidth,0)$) -- (#3) -- ($(dummy)-(\uwidearrowidth,0)$) -| ($(#2)-(\uwidearrowidth/2,0)$);}% \node [minimum height = 0pt, minimum width = 0pt, fill=white, scale=.5, rotate= -90] at($(#2)!.5!(#3)$){#4}; }
+\newcommand{\uvdwidearrow}[4]		{\node at($(#2)!.2!(#3)$) (dummy1){}; 
+									 \node at($(#2)!.8!(#3)$) (dummy2){}; 
+									 \draw[#1] (#2) -- ($(dummy1)-(\uwidearrowidth ,0)$)--++(\uwidearrowidth/2,0) |- ($(dummy2)-(\uwidearrowidth ,0)$) -- (#3)
+									 --($(dummy2)+(\uwidearrowidth ,0)$) -| ($(dummy1)+(\uwidearrowidth/2 , 0)$) --++(\uwidearrowidth/2,0) -- (#2);}
+									%\node [minimum height = 0pt, minimum width = 0pt, fill=white, scale=.5, rotate= -90] at($(#2)!.5!(#3)$){#4}; }
+
+\newcommand{\imgcentered}[3]        {\begin{figure} \centering \includegraphics[width=0.5\textwidth]{#1} \caption{ #2 } \label{ #3 } \end{figure}}
+
+\newcommand{\abs}[1]				{\ensuremath{\left\vert#1\right\vert}} 
+
+\DeclareMathOperator{\atan}{atan}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Paper info
+
+\title{\worktitl}
+\subtitle{\subtitl}
+\author{\uauthor}
+\date{\workdat}
+
+\addto\captionsngerman{\renewcommand{\figurename}{Abb.}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%PDF Eigenschaften
+\hypersetup{
+hidelinks,
+pdftitle={\worktitl}
+pdfauthor={\uauthor},
+pdfsubject={\worktitl}
+pdfkeywords={\worktitl}
+}
+
+

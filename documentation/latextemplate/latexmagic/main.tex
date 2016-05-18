@@ -1,0 +1,54 @@
+\input{latexmagic/packages.tex} %define packages and global settings here
+\input{latexmagic/header.tex} %define header
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Titel
+\selectlanguage{ngerman}
+\input{latexmagic/titlesheet.tex} %Titlesheet
+%\maketitle
+\newpage
+
+%Inhaltverzeichnis
+\selectlanguage{ngerman}
+\singlespacing
+%\pagenumbering{gobble} %no pagenumbering
+\markright{}
+\tableofcontents
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Abbildungsverzeichnis	
+\addcontentsline{toc}{section}{Abbildungsverzeichnis} 
+\listoffigures
+\onehalfspacing
+\newpage
+%\setcounter{romanmark}{\value{page}} %save roman page counter for appendix
+\pagenumbering{arabic} %set pagecount arabic for main part
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\input{latexmagic/settings.tex} %all settings that need to be declared after \begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Begin Chapters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Input chapters here
+\input{content.tex}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%EndChapters
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%\newpage
+%\bibliography{library}
+%\bibliographystyle{amsplain}
+%\newpage
+%\input{inputs/appendix.tex}
+
+
+
+
+\end{document}

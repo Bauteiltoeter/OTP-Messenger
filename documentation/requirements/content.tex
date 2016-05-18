@@ -1,0 +1,128 @@
+\section{Projektbeschreibung}
+\label{sec:projektbeschreibung}
+
+Im Rahmen dieses Projektes soll eine Möglichkeit für jedermann geschaffen
+werden, mit der in der Theorie absolut sicheren Verschlüsselungstechnologie
+\glqq One-Time pad\grqq (OTP) verschlüsselt zu Kommunizieren. Dabei wird durch Hard-
+und Softwaremaßnahmen auf der Endgeräteseite die Integrität der Nachrichten
+gewährleistet. 
+
+\section{Anforderungen}
+\label{sec:requirements}
+
+\subsection{Anforderungen die Hardware}
+\label{sec:anforderungen-hardware}
+
+\subsubsection{HW-REQ100: Einplatinen-Computer}
+\label{sec:hwreq100}
+Als Grundgerüst für die Bedieneinheit soll ein Einplatinen-Computer vom Typ
+\glqq Raspberry Pi\grqq verwendet werden. Die Netzwerkbuchse auf dem Raspberry
+PI wird hardwareseitig deaktiviert, so wird das unauthorisierte Eindringen über
+das Netzwerk verhindert. 
+
+\subsubsection{HW-REQ200: Erweiterungskarte für den RasPi}
+\label{sec:hwreq200}
+Auf einer eigens entwickelten Erweiterungskarte für
+den Raspberry Pi werden drei Subsysteme untergebracht:
+\begin{itemize}
+	\item Der Zufallszahlengenerator. Als Vorlage hierfür dient das
+		\hyperlink{http://www.jtxp.org/tech/xr232usb.htm}{XR232USB-Projekt}. Die Platine
+		muss so gestaltet sein, dass der Zufallsgenerator mit aufgelöteten
+		Weißblech-Gehäusen gegen Störeinstrahlung geschützt werden kann. 
+	\item Die RS232-Verbindung. Die Erweiterungskarte nimmt Daten über die
+serielle Schnittstelle entgegen und gibt sie wahlweise direkt über einen
+dreipoligen Verbinder weiter, oder aber wandelt diese über einen
+USB-RS232-Wandler in ein USB-Signal um. Dabei muss die Hardware so gestaltet
+werden, das weder eine USB-Verbindung bei abgeschaltetem RasPi, noch eine nicht
+mit Strm versorgte USB-Verbindung bei aktiviertem RasPi der Hardware schaden
+zufügen können.
+	\item USB-Hub. Um die fünf benötigen USB-Buchsen (Tastatur/Maus \ref{sec:hwreq400}, Zufallszahlengenerator, zwei SD-Kartenleser \ref{sec:hwreq300})
+ zu verfügung zu stellen, muss ein Hub auf der Erweiterungskarte untergebracht werden.
+\end{itemize}
+
+\subsubsection{HW-REQ300: Zufallszahlenspeicher}
+\label{sec:hwreq300}
+Die vom Zufallszahlengerator erzeugten Zufallsdaten werden auf zwei SD-Karten
+gespeichert. Beide sind mit USB an dem Raspberry Pi verbunden.
+
+\subsubsection{HW-REQ400: Eingabemöglichkeiten}
+\label{sec:hwreq400}
+Die Bedienung des Geräts muss über Maus und Tastatur geschehen.
+
+\subsubsection{HW-REQ500: Message relay}
+\label{sec:hwreq500}
+Als Message relay ins Internet dient ein standard-Bürocomputer.
+
+\subsubsection{HW-REQ600: Server}
+\label{sec:hwreq600}
+Als message relay-server dient ein normaler Server mit rootzugang.
+
+\subsubsection{HW-REQ700: Funkmodulator}
+\label{sec:hwreq700}
+Als Alternative zum Internet sollen zwei Teilnehmer auch direkt mit einer
+Funkverbindung verschlüsselt kommunizieren können. Der Modulator muss direkt
+über eine serielle Schnittstelle mit der Erweiterungskarte (\ref{sec:hqreq200}
+verbunden werden können-
+
+\subsection{Anforderungen an die Software}
+\label{sec:anforderungen-software}
+
+\subsubsection{SW-REQ100: Betriebssystem}
+\label{sec:swreq100}
+Auf dem unter \ref{sec:hwreq100} definiertem Einplatinen-Computer läuft eine
+gehärtete Linux-Distribution. Sie ist auf ein Minimum abgespeckt um eine
+möglichst geringe Angriffsfläche zu bieten.
+
+\subsubsection{SW-REQ200: Bootvorgang}
+\label{sec:swreq200}
+Direkt nach dem Booten soll das Betriebssystem automatisch die Chatsoftware
+starten. Ein Wechsel auf den Desktop des Betriebssystems sowie das Beenden der
+Chatsoftware muss verhindert werden. 
+
+\subsubsection{SW-REQ300: GUI}
+\label{sec:swreq300}
+Die grafische Oberfläche des Programms muss folgende Anforderungen erfüllen:
+\begin{itemize}
+\item Anzeige von Freunden
+\item Anlegen von Freunden
+\item Zufallszahlengeneration steuern und füllen der zwei SD-Karten mit den neuen
+Zufallsdaten
+\item Anzeigen der noch verfügbaren Entropie
+\item Mit Freunden chatten 
+\end{itemize}
+
+\subsubsection{SW-REQ400: Zufallsgenerator}
+\label{sec:swreq400}
+Der Zufallsgenerator muss den USB-Zufallsgenerator ansprechen und die
+Zufallsdaten auf SD-Karte speichern können. Dabei müssen die Zufallsdaten in
+kleineren Blöcken gespeichert werden.
+
+\subsubsection{SW-REQ500: Crypto-Modul}
+\label{sec:swreq500}
+Das eigentliche Cryptomodul beinhaltet folgende Funktionen, die von der GUI
+aufgerufen werden können:
+\begin{itemize}
+\item Anlegen eines Accounts, festlegen einer eindeutigen User-ID
+(\ref{sec:swreq600})
+\item Verwalten von Freunden
+\item Nachrichten verschlüsseln
+\item Nachrichten entschlüsseln
+\item Verwendete Zufallsdaten müssen auf der SD-Karte sofort mit Nullen
+überschrieben werden 
+\end{itemize}
+
+\subsubsection{SW-REQ600: User-ID}
+\label{sec:swreq600}
+Für den Endbenutzer ist die User-ID eine Base36-kodierte 32-Bit Zahl. Beim ersten Start
+der Software wird der Benutzer aufgefordert, an einem Computer mit
+Internetzugang eine neue Benutzer-ID anzufordern und auf dem Endgerät
+einzutippen. Der Master-Server hat eine Liste aller noch verfügbaren User-IDs,
+beim Besuch der Webseite des Projekts wird bei jedem Laden eine neue Generiert
+und angezeigt. 
+
+ 
+
+
+
+
+
